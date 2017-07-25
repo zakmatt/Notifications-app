@@ -54,14 +54,15 @@ extension MainVC {
     
     func scheduleNotification(inSeconds: TimeInterval, completion: @escaping (_ Success: Bool) -> ()) {
         
-        // Add an attachment
-        
-        
         let notify = UNMutableNotificationContent()
         
         notify.title = "New notification!"
         notify.subtitle = "Super subtitle notification"
         notify.body = "This is the super body of popped notification!"
+        
+        if let attachment = createAttachment(completion: completion) {
+            notify.attachments = [attachment]
+        }
         
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: false)
         
