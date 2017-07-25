@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UNUserNotificationCenter.current().delegate = self
         
+        configureUserNotifications()
+        
         return true
     }
 
@@ -43,6 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    private func configureUserNotifications() {
+        let category = UNNotificationCategory(identifier: NOTIFICATION_CATEGORY_IDENTIFIER, actions: [], intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([category])
     }
 }
 
