@@ -56,6 +56,9 @@ extension MainVC {
         
         let notify = UNMutableNotificationContent()
         
+        // For extension identifier
+        notify.categoryIdentifier = NOTIFICATION_CATEGORY_IDENTIFIER
+        
         notify.title = "New notification!"
         notify.subtitle = "Super subtitle notification"
         notify.body = "This is the super body of popped notification!"
