@@ -40,7 +40,23 @@ extension MainVC {
         })
     }
     
+    func createAttachment(completion: (_ Success: Bool) -> ()) -> UNNotificationAttachment? {
+        let myImage = "buy_personality"
+        guard let imageURL = Bundle.main.url(forResource: myImage, withExtension: "jpeg") else {
+            completion(false)
+            return nil
+        }
+        
+        var attachment: UNNotificationAttachment
+        attachment = try! UNNotificationAttachment(identifier: NOTIFICATION_IDENTIFIER, url: imageURL, options: .none)
+        return attachment
+    }
+    
     func scheduleNotification(inSeconds: TimeInterval, completion: @escaping (_ Success: Bool) -> ()) {
+        
+        // Add an attachment
+        
+        
         let notify = UNMutableNotificationContent()
         
         notify.title = "New notification!"
@@ -49,7 +65,7 @@ extension MainVC {
         
         let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: inSeconds, repeats: false)
         
-        let request = UNNotificationRequest(identifier: "myNotification", content: notify, trigger: notificationTrigger)
+        let request = UNNotificationRequest(identifier: NOTIFICATION_IDENTIFIER, content: notify, trigger: notificationTrigger)
         
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if error != nil {
